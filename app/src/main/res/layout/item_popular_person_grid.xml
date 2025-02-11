@@ -37,7 +37,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:id="@+id/ivBackDrop"
-                    android:src="@drawable/ic_backdrop_m"
+                    tools:src="@drawable/ic_backdrop_m"
                     android:scaleType="centerCrop"
                     app:layout_constraintDimensionRatio="H,2.25:1"
                     app:layout_constraintStart_toStartOf="parent"
@@ -47,9 +47,8 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
-                    android:layout_height="80dp"
+                    android:layout_height="86dp"
                     android:id="@+id/cvRoundPersonImg"
-                    app:cardBackgroundColor="@android:color/transparent"
                     app:cardCornerRadius="50pt"
                     app:cardElevation="0dp"
                     app:layout_constraintDimensionRatio="W,1:1"
@@ -58,12 +57,23 @@
                     app:layout_constraintTop_toBottomOf="@id/ivBackDrop"
                     app:layout_constraintBottom_toBottomOf="@id/ivBackDrop"
                     >
-                    <ImageView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/ivPersonImg"
-                        android:src="@drawable/ic_sample"
-                        />
+                        android:layout_margin="4dp"
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardCornerRadius="50pt"
+                        app:cardElevation="0dp"
+                        >
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/ivPersonImg"
+                            app:load_image_with_prefix="@{personShortInfo.profilePath}"
+                            tools:src="@drawable/ic_sample"
+                            android:scaleType="centerCrop"
+                            />
+                    </androidx.cardview.widget.CardView>
                 </androidx.cardview.widget.CardView>
 
                 <TextView

@@ -5,4 +5,5 @@
     <color name="primary">#8F6FF5</color>
     <color name="card_shadow">#CECECE</color>
     <color name="text_gray">#474747</color>
+    <color name="placeholder">#403d3d</color>
 </resources>

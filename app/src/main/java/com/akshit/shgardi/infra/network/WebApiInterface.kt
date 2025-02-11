@@ -15,5 +15,7 @@ interface WebApiInterface {
         var BASE_URL = "https://api.themoviedb.org/"
         val API_VERSION = "3/"
 
+        val PERSON_IMG_PREFIX = "https://image.tmdb.org/t/p/w500"
+
     }
 }
