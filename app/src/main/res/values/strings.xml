@@ -5,4 +5,5 @@
     <string name="mobile_data">Mobile data</string>
     <string name="Wifi">Wifi</string>
     <string name="please_wait">Please wait...!</string>
+    <string name="person_name">Person Name</string>
 </resources>

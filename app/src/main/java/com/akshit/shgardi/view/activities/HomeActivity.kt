@@ -2,17 +2,19 @@ package com.akshit.shgardi.view.activities
 
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.GridLayoutManager
 import com.akshit.shgardi.R
 import com.akshit.shgardi.databinding.ActivityHomeBinding
 import com.akshit.shgardi.infra.CoreApplication
 import com.akshit.shgardi.infra.network.NetworkResult
 import com.akshit.shgardi.infra.utils.ConnectivityManager
+import com.akshit.shgardi.models.ResultsItem
 import com.akshit.shgardi.utilities.ProgressDialog
+import com.akshit.shgardi.view.adapters.PopularPersonAdapter
 import com.akshit.shgardi.viewmodels.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -36,6 +38,12 @@ class HomeActivity : AppCompatActivity() {
         callPopularPersonListAPIs(currPageNo)
     }
 
+    private fun loadPopularPersonList(results: List<ResultsItem?>) {
+        binding.rvPopularPerson.adapter = PopularPersonAdapter(results){ personShortInfo->
+            Toast.makeText(this,personShortInfo?.name,Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun callPopularPersonListAPIs(pageNo: Int){
         if (connectivityManager.internetAvailable(CoreApplication.appContext)){
             homeViewModel.getPopularPersonList("en-US",pageNo)
@@ -51,8 +59,8 @@ class HomeActivity : AppCompatActivity() {
                     dialog.show()
                 }
                 is NetworkResult.Success -> {
+                    response.data?.results?.let { loadPopularPersonList(it) }
                     dialog.dismiss()
-                    Log.d("popularPersonListResponse","Api Success")
                 }
             }
         }
