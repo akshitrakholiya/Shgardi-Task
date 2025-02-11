@@ -3,8 +3,7 @@ package com.akshit.shgardi.infra.repo
 import com.akshit.shgardi.infra.network.BaseApiResponse
 import com.akshit.shgardi.infra.network.NetworkResult
 import com.akshit.shgardi.infra.network.RemoteDataSource
-import com.akshit.shgardi.models.UserInfoRequest
-import com.akshit.shgardi.models.UserInfoResponse
+import com.akshit.shgardi.models.PopularPersonListResponse
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -17,9 +16,9 @@ class HomeRepository @Inject constructor(
     private val remoteDataSource: RemoteDataSource
 ) : BaseApiResponse() {
 
-    suspend fun getUserInfo(userInfoRequest: UserInfoRequest): Flow<NetworkResult<UserInfoResponse>> {
-        return flow<NetworkResult<UserInfoResponse>> {
-            emit(safeApiCall { remoteDataSource.getUserInfo(userInfoRequest) })
+    suspend fun getPopularPersonList(lang:String, pageNo: Int): Flow<NetworkResult<PopularPersonListResponse>> {
+        return flow<NetworkResult<PopularPersonListResponse>> {
+            emit(safeApiCall { remoteDataSource.getPopularPersonList(lang, pageNo) })
         }.flowOn(Dispatchers.IO)
     }
 

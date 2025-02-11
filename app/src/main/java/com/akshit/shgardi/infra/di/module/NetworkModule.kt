@@ -1,6 +1,7 @@
 package com.akshit.shgardi.infra.di.module
 
 import android.util.Log
+import com.akshit.shgardi.BuildConfig
 import com.akshit.shgardi.infra.network.WebApiInterface
 import com.akshit.shgardi.infra.utils.ConnectivityManager
 import com.akshit.shgardi.utilities.*
@@ -96,9 +97,13 @@ class NetworkModule {
             sb.append(CONTENT_TYPE_KEY).append(" : ").append(
                 CONTENT_TYPE_VALUE_JSON
             ).append("\n")
+            sb.append(AUTHORIZATION).append(" : ").append(
+                BuildConfig.AUTHORIZATION_VALUE
+            ).append("\n")
 
             request = request.newBuilder()
                 .addHeader(CONTENT_TYPE_KEY, CONTENT_TYPE_VALUE_JSON)
+                .addHeader(AUTHORIZATION, BuildConfig.AUTHORIZATION_VALUE)
                 .build()
 
             sb.append("****Headers Finish****")

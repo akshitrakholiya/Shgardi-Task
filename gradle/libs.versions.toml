@@ -14,6 +14,7 @@ coroutine = "1.6.1"
 retrofit = "2.9.0"
 logginginterceptor = "4.9.2"
 glide = "4.12.0"
+ktx = "1.5.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -23,6 +24,8 @@ androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-co
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "ktx" }
+
 #Coroutines
 kotlinx-coroutines-android = { group= "org.jetbrains.kotlinx", name= "kotlinx-coroutines-android", version.ref="coroutine"}
 kotlinx-coroutines-core = { group= "org.jetbrains.kotlinx", name= "kotlinx-coroutines-core", version.ref="coroutine"}

@@ -20,7 +20,12 @@ android {
     }
 
     buildTypes {
+        debug{
+            buildConfigField("String", "AUTHORIZATION_VALUE", "\"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMzE0MzI4MjU2OGQ5MWRiMzkxNTM4MmE4ZTg3MzdkYiIsIm5iZiI6MTczOTI3NTUzMy4yMzcsInN1YiI6IjY3YWIzZDBkNmViMzZkMGRhZDliYTZhNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.-iwH2bcBMdViCpIukS1z_sAuMdFFBYx6YUatHngv7Yw\"")
+        }
         release {
+            buildConfigField("String", "AUTHORIZATION_VALUE", "\"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMzE0MzI4MjU2OGQ5MWRiMzkxNTM4MmE4ZTg3MzdkYiIsIm5iZiI6MTczOTI3NTUzMy4yMzcsInN1YiI6IjY3YWIzZDBkNmViMzZkMGRhZDliYTZhNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.-iwH2bcBMdViCpIukS1z_sAuMdFFBYx6YUatHngv7Yw\"")
+
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -46,6 +51,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.activity.ktx)
 
     //Coroutines
     implementation(libs.kotlinx.coroutines.android)

@@ -9,6 +9,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.provider.Settings
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.akshit.shgardi.R
 
@@ -41,6 +42,15 @@ class ConnectivityManager {
             else
                 nc.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) ||
                         nc.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+        }
+    }
+
+    fun internetAvailable(context: Context) : Boolean{
+        return if (!isNetworkAvailable(context)) {
+            Toast.makeText(context,context.getString(R.string.turn_on_internet), Toast.LENGTH_LONG).show()
+            false
+        } else{
+            true
         }
     }
 

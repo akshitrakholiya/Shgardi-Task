@@ -7,8 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.akshit.shgardi.infra.network.NetworkResult
 import com.akshit.shgardi.infra.repo.HomeRepository
-import com.akshit.shgardi.models.UserInfoRequest
-import com.akshit.shgardi.models.UserInfoResponse
+import com.akshit.shgardi.models.PopularPersonListResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,15 +18,15 @@ class HomeViewModel @Inject constructor(
     application: Application
 ) : AndroidViewModel(application) {
 
-    private val _userInfoResponse: MutableLiveData<NetworkResult<UserInfoResponse>> = MutableLiveData()
-    val userInfoResponse: LiveData<NetworkResult<UserInfoResponse>> = _userInfoResponse
+    private val _popularPersonListResponse: MutableLiveData<NetworkResult<PopularPersonListResponse>> = MutableLiveData()
+    val popularPersonListResponse: LiveData<NetworkResult<PopularPersonListResponse>> = _popularPersonListResponse
 
 
 
-    fun getUserInfo(userInfoRequest: UserInfoRequest) = viewModelScope.launch {
-        _userInfoResponse.value = NetworkResult.Loading()
-        homeRepository.getUserInfo(userInfoRequest).collect { values ->
-            _userInfoResponse.value = values
+    fun getPopularPersonList(lang: String, pageNo: Int) = viewModelScope.launch {
+        _popularPersonListResponse.value = NetworkResult.Loading()
+        homeRepository.getPopularPersonList(lang, pageNo).collect { values ->
+            _popularPersonListResponse.value = values
         }
     }
 }
