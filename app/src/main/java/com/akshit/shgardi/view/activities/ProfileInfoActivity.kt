@@ -2,6 +2,7 @@ package com.akshit.shgardi.view.activities
 
 import android.app.Dialog
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -32,6 +33,8 @@ class ProfileInfoActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this,R.layout.activity_person_info)
         dialog = ProgressDialog.progressDialog(this)
 
+        binding.clPersonInfo.visibility = View.INVISIBLE
+
         personId = intent.getIntExtra(getString(R.string.args_person_id),0)
         callPersonInfoAPIs(personId)
 
@@ -61,7 +64,9 @@ class ProfileInfoActivity : AppCompatActivity() {
         }
     }
 
-    private fun showPersonInfo(personInfo: PersonInfoResponse) {
-        Toast.makeText(this,personInfo.name,Toast.LENGTH_SHORT).show()
+    private fun showPersonInfo(_personInfo: PersonInfoResponse) {
+        binding.personInfo = _personInfo
+        binding.clPersonInfo.visibility = View.VISIBLE
+        Toast.makeText(this,_personInfo.name,Toast.LENGTH_SHORT).show()
     }
 }

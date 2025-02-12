@@ -3,7 +3,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="primary">#8F6FF5</color>
+    <color name="text_male">#8F6FF5</color>
+    <color name="text_female">#DE8FC2</color>
     <color name="card_shadow">#CECECE</color>
     <color name="text_gray">#474747</color>
+    <color name="text_black">#000000</color>
     <color name="placeholder">#403d3d</color>
 </resources>
