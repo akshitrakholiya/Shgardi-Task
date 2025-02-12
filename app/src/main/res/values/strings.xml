@@ -6,4 +6,5 @@
     <string name="Wifi">Wifi</string>
     <string name="please_wait">Please wait...!</string>
     <string name="person_name">Person Name</string>
+    <string name="args_person_id">personId</string>
 </resources>

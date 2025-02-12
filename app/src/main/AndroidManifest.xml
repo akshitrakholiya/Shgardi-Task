@@ -17,6 +17,9 @@
         android:theme="@style/Theme.ShgardiTask"
         tools:targetApi="31">
         <activity
+            android:name=".view.activities.ProfileInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.activities.HomeActivity"
             android:exported="true">
             <intent-filter>

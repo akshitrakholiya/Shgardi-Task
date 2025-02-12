@@ -1,6 +1,7 @@
 package com.akshit.shgardi.view.activities
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -48,7 +49,9 @@ class HomeActivity : AppCompatActivity() {
     private fun loadPopularPersonList(results: List<ResultsItem?>) {
 
         popularPersonAdapter = PopularPersonAdapter(results.toMutableList()){ personShortInfo->
-            Toast.makeText(this,personShortInfo?.name,Toast.LENGTH_SHORT).show()
+            val intent = Intent(this,ProfileInfoActivity::class.java)
+            intent.putExtra(getString(R.string.args_person_id),personShortInfo?.id)
+            startActivity(intent)
         }
         binding.rvPopularPerson.adapter = popularPersonAdapter
 
