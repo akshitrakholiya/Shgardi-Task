@@ -3,6 +3,7 @@ package com.akshit.shgardi.infra.repo
 import com.akshit.shgardi.infra.network.BaseApiResponse
 import com.akshit.shgardi.infra.network.NetworkResult
 import com.akshit.shgardi.infra.network.RemoteDataSource
+import com.akshit.shgardi.models.PersonImagesResponse
 import com.akshit.shgardi.models.PersonInfoResponse
 import com.akshit.shgardi.models.PopularPersonListResponse
 import dagger.hilt.android.scopes.ActivityRetainedScoped
@@ -26,6 +27,12 @@ class HomeRepository @Inject constructor(
     suspend fun getPersonInfo(lang:String, personId: Int): Flow<NetworkResult<PersonInfoResponse>> {
         return flow<NetworkResult<PersonInfoResponse>> {
             emit(safeApiCall { remoteDataSource.getPersonInfo(lang, personId) })
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun getPersonImages(personId: Int): Flow<NetworkResult<PersonImagesResponse>> {
+        return flow<NetworkResult<PersonImagesResponse>> {
+            emit(safeApiCall { remoteDataSource.getPersonImages(personId) })
         }.flowOn(Dispatchers.IO)
     }
 

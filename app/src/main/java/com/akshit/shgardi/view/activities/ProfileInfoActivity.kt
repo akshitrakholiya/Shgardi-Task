@@ -12,6 +12,7 @@ import com.akshit.shgardi.databinding.ActivityPersonInfoBinding
 import com.akshit.shgardi.infra.CoreApplication
 import com.akshit.shgardi.infra.network.NetworkResult
 import com.akshit.shgardi.infra.utils.ConnectivityManager
+import com.akshit.shgardi.models.PersonImagesResponse
 import com.akshit.shgardi.models.PersonInfoResponse
 import com.akshit.shgardi.utilities.ProgressDialog
 import com.akshit.shgardi.viewmodels.PersonInfoViewModel
@@ -37,7 +38,7 @@ class ProfileInfoActivity : AppCompatActivity() {
 
         personId = intent.getIntExtra(getString(R.string.args_person_id),0)
         callPersonInfoAPIs(personId)
-
+        callPersonImagesAPIs(personId)
     }
 
     private fun callPersonInfoAPIs(personId: Int) {
@@ -62,6 +63,34 @@ class ProfileInfoActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun callPersonImagesAPIs(personId: Int) {
+        if(connectivityManager.internetAvailable(CoreApplication.appContext)){
+            personInfoViewModel.getPersonImages(personId)
+        }
+
+        personInfoViewModel.personImagesResponse.observe(this){ response->
+            when(response){
+                is NetworkResult.Error -> {
+                    dialog.dismiss()
+                    Toast.makeText(this,response.message.toString(), Toast.LENGTH_SHORT).show()
+                }
+                is NetworkResult.Loading -> {
+                    dialog.show()
+                }
+                is NetworkResult.Success -> {
+                    response.data?.let {
+                        showPersonImages(it)
+                    }
+                    dialog.dismiss()
+                }
+            }
+        }
+    }
+
+    private fun showPersonImages(personImagesResponse: PersonImagesResponse) {
+
     }
 
     private fun showPersonInfo(_personInfo: PersonInfoResponse) {

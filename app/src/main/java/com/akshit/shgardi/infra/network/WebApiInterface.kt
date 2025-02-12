@@ -1,5 +1,6 @@
 package com.akshit.shgardi.infra.network
 
+import com.akshit.shgardi.models.PersonImagesResponse
 import com.akshit.shgardi.models.PersonInfoResponse
 import com.akshit.shgardi.models.PopularPersonListResponse
 import retrofit2.Response
@@ -12,6 +13,9 @@ interface WebApiInterface {
 
     @GET()
     suspend fun getPersonInfo(@Url url: String): Response<PersonInfoResponse>
+
+    @GET()
+    suspend fun getPersonImages(@Url url: String): Response<PersonImagesResponse>
 
     companion object {
 
