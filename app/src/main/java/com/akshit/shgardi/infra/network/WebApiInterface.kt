@@ -12,6 +12,9 @@ interface WebApiInterface {
     suspend fun getPopularPersonList(@Url url: String): Response<PopularPersonListResponse>
 
     @GET()
+    suspend fun searchPersonList(@Url url: String): Response<PopularPersonListResponse>
+
+    @GET()
     suspend fun getPersonInfo(@Url url: String): Response<PersonInfoResponse>
 
     @GET()

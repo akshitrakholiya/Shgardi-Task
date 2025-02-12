@@ -24,6 +24,12 @@ class HomeRepository @Inject constructor(
         }.flowOn(Dispatchers.IO)
     }
 
+    suspend fun searchPersonList(query: String, includeAdult: Boolean, lang: String, pageNo: Int): Flow<NetworkResult<PopularPersonListResponse>> {
+        return flow<NetworkResult<PopularPersonListResponse>> {
+            emit(safeApiCall { remoteDataSource.searchPersonList(query, includeAdult, lang, pageNo) })
+        }.flowOn(Dispatchers.IO)
+    }
+
     suspend fun getPersonInfo(lang:String, personId: Int): Flow<NetworkResult<PersonInfoResponse>> {
         return flow<NetworkResult<PersonInfoResponse>> {
             emit(safeApiCall { remoteDataSource.getPersonInfo(lang, personId) })
