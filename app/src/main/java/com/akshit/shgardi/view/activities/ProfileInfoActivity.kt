@@ -37,6 +37,10 @@ class ProfileInfoActivity : AppCompatActivity() {
 
         binding.clPersonInfo.visibility = View.INVISIBLE
 
+        binding.ivBackBtn.setOnClickListener {
+            finish()
+        }
+
         personId = intent.getIntExtra(getString(R.string.args_person_id),0)
         callPersonInfoAPIs(personId)
         callPersonImagesAPIs(personId)

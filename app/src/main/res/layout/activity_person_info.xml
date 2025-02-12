@@ -17,6 +17,18 @@
         tools:context=".view.activities.ProfileInfoActivity">
 
         <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ivBackBtn"
+            android:src="@drawable/ic_arrow_back"
+            android:elevation="12dp"
+            android:padding="8dp"
+            android:layout_margin="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:id="@+id/ivBackDrop"
