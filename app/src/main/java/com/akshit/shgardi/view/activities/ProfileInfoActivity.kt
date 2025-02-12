@@ -15,6 +15,7 @@ import com.akshit.shgardi.infra.utils.ConnectivityManager
 import com.akshit.shgardi.models.PersonImagesResponse
 import com.akshit.shgardi.models.PersonInfoResponse
 import com.akshit.shgardi.utilities.ProgressDialog
+import com.akshit.shgardi.view.adapters.PersonImagesAdapter
 import com.akshit.shgardi.viewmodels.PersonInfoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -90,6 +91,12 @@ class ProfileInfoActivity : AppCompatActivity() {
     }
 
     private fun showPersonImages(personImagesResponse: PersonImagesResponse) {
+        if (personImagesResponse.profiles?.isNotEmpty() == true){
+            binding.rvPhotoGallery.adapter = PersonImagesAdapter(personImagesResponse.profiles)
+        }else{
+            binding.tvPhotoGalleryLabel.visibility = View.GONE
+            binding.rvPhotoGallery.visibility = View.GONE
+        }
 
     }
 

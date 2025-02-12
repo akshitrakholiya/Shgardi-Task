@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="personImage"
+            type="com.akshit.shgardi.models.ProfilesItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            android:shadowColor="@color/card_shadow"
+            android:outlineAmbientShadowColor="@color/card_shadow"
+            android:outlineSpotShadowColor="@color/card_shadow"
+            app:layout_constraintDimensionRatio="H,2:3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/ivImage"
+                tools:src="@drawable/ic_sample"
+                app:load_image_with_prefix="@{personImage.filePath}"
+                android:scaleType="centerCrop"
+                />
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
