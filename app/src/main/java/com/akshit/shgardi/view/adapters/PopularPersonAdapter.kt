@@ -9,7 +9,7 @@ import com.akshit.shgardi.databinding.ItemPopularPersonGridBinding
 import com.akshit.shgardi.models.ResultsItem
 
 class PopularPersonAdapter(
-    private val popularPersonList: List<ResultsItem?>,
+    private val popularPersonList: MutableList<ResultsItem?> = mutableListOf(),
     private val itemClickListener: (ResultsItem?) -> Unit
 ): RecyclerView.Adapter<PopularPersonAdapter.PopularPersonViewHolder>() {
 
@@ -52,6 +52,12 @@ class PopularPersonAdapter(
 
     override fun getItemCount(): Int {
         return popularPersonList.size
+    }
+
+    fun addPopularPersonList(newPopularPersonList: List<ResultsItem?>) {
+        val startPosition = popularPersonList.size
+        popularPersonList.addAll(newPopularPersonList)
+        notifyItemRangeInserted(startPosition, newPopularPersonList.size)
     }
 
 }

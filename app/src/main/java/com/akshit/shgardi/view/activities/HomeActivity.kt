@@ -12,7 +12,9 @@ import com.akshit.shgardi.databinding.ActivityHomeBinding
 import com.akshit.shgardi.infra.CoreApplication
 import com.akshit.shgardi.infra.network.NetworkResult
 import com.akshit.shgardi.infra.utils.ConnectivityManager
+import com.akshit.shgardi.models.PopularPersonListResponse
 import com.akshit.shgardi.models.ResultsItem
+import com.akshit.shgardi.utilities.PaginationListener
 import com.akshit.shgardi.utilities.ProgressDialog
 import com.akshit.shgardi.view.adapters.PopularPersonAdapter
 import com.akshit.shgardi.viewmodels.HomeViewModel
@@ -27,7 +29,12 @@ class HomeActivity : AppCompatActivity() {
     @Inject
     lateinit var connectivityManager: ConnectivityManager
     private val homeViewModel: HomeViewModel by viewModels<HomeViewModel>()
+    private lateinit var popularPersonAdapter: PopularPersonAdapter
+
     private var currPageNo = 1
+    private var isLoading = false
+    private var maxPageSize = 500 //Usually pageSize need to be passed from API, but I manually tested this api not supporting after 500 page so.
+    private var isLastItem = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,9 +46,13 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun loadPopularPersonList(results: List<ResultsItem?>) {
-        binding.rvPopularPerson.adapter = PopularPersonAdapter(results){ personShortInfo->
+
+        popularPersonAdapter = PopularPersonAdapter(results.toMutableList()){ personShortInfo->
             Toast.makeText(this,personShortInfo?.name,Toast.LENGTH_SHORT).show()
         }
+        binding.rvPopularPerson.adapter = popularPersonAdapter
+
+        addPopularPersonListScrollListener()
     }
 
     private fun callPopularPersonListAPIs(pageNo: Int){
@@ -57,12 +68,55 @@ class HomeActivity : AppCompatActivity() {
                 }
                 is NetworkResult.Loading -> {
                     dialog.show()
+                    isLoading = true
                 }
                 is NetworkResult.Success -> {
-                    response.data?.results?.let { loadPopularPersonList(it) }
+                    paginationRelatedValidation(response.data)
                     dialog.dismiss()
                 }
             }
         }
+    }
+
+    private fun paginationRelatedValidation(_response: PopularPersonListResponse?) {
+        if ((_response?.page ?: 0) >= maxPageSize) {
+            isLastItem = true
+        }
+
+        if((_response?.page ?: 0) > 1){
+            _response?.results?.let {
+                addPopularPersonList(it)
+            }
+        }else if((_response?.page ?: 0) == 1){
+            _response?.results?.let {
+                loadPopularPersonList(it)
+            }
+        }
+
+        isLoading = false
+    }
+
+    private fun addPopularPersonList(popularPersonList: List<ResultsItem?>) {
+        popularPersonAdapter.addPopularPersonList(popularPersonList)
+    }
+
+    private fun addPopularPersonListScrollListener(){
+        binding.rvPopularPerson.addOnScrollListener(object : PaginationListener(binding.rvPopularPerson.layoutManager as GridLayoutManager){
+            override fun loadMoreItems() {
+                if(!isLastItem){
+                    currPageNo++
+                    callPopularPersonListAPIs(currPageNo)
+                }
+            }
+
+            override fun isLastPage(): Boolean {
+                return isLastItem
+            }
+
+            override fun isLoading(): Boolean {
+                return isLoading
+            }
+
+        })
     }
 }
