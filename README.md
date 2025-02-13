@@ -20,6 +20,10 @@ An Android app showcasing popular people in the entertainment industry using the
 <img src ="./readme/PersonInfo%20Screen.png" width="200" />
 
 
+## 📷 RTL Supported Screenshots
+<img src ="./readme/RTLHomeScreen.png" width="200" />&nbsp;&nbsp;<img src ="./readme/RTLSearchScreen.png" width="200" />
+<img src ="./readme/RTLInfoScreen.png" width="200" />
+
 ## 💻 Permissions
 - Internet
 
