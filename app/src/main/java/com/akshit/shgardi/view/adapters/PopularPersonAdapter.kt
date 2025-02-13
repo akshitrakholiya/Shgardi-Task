@@ -27,6 +27,9 @@ class PopularPersonAdapter(
                 2 -> {
                     binding.ivBackDrop.setImageResource(R.drawable.ic_backdrop_m)
                 }
+                else -> {
+                    binding.ivBackDrop.setImageResource(R.drawable.ic_sample)
+                }
             }
 
             binding.root.setOnClickListener {
@@ -58,6 +61,11 @@ class PopularPersonAdapter(
         val startPosition = popularPersonList.size
         popularPersonList.addAll(newPopularPersonList)
         notifyItemRangeInserted(startPosition, newPopularPersonList.size)
+    }
+
+    fun clearPopularPersonList() {
+        popularPersonList.clear()
+        notifyDataSetChanged()
     }
 
 }

@@ -107,6 +107,5 @@ class ProfileInfoActivity : AppCompatActivity() {
     private fun showPersonInfo(_personInfo: PersonInfoResponse) {
         binding.personInfo = _personInfo
         binding.clPersonInfo.visibility = View.VISIBLE
-        Toast.makeText(this,_personInfo.name,Toast.LENGTH_SHORT).show()
     }
 }
