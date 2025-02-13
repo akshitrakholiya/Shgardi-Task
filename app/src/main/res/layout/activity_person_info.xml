@@ -35,6 +35,8 @@
             android:src="@{personInfo.gender==1 ? @drawable/ic_backdrop_f :@drawable/ic_backdrop_m}"
             tools:src="@drawable/ic_backdrop_m"
             android:scaleType="centerCrop"
+            app:chainUseRtl="true"
+            app:guidelineUseRtl="true"
             app:layout_constraintDimensionRatio="H,2:1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
